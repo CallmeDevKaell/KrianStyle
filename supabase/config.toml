@@ -1,0 +1,8 @@
+[functions.register-member]
+verify_jwt = false
+
+[functions.admin-accounts]
+verify_jwt = false
+
+[functions.leadership-accounts]
+verify_jwt = false

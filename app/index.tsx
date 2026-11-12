@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import {
   Dimensions,
@@ -40,6 +41,7 @@ const officers = [
 type SectionKey = 'story' | 'zone' | 'officers';
 
 export default function HomeScreen() {
+  const router = useRouter();
   const scrollRef = useRef<ScrollView>(null);
   const storyY = useRef(0);
   const zoneY = useRef(0);
@@ -72,6 +74,14 @@ export default function HomeScreen() {
             style={styles.zoneHeaderLogo}
             contentFit="contain"
           />
+        </View>
+        <View style={styles.authActions}>
+          <Pressable style={styles.loginAction} onPress={() => router.push('/login')}>
+            <Text style={styles.loginActionText}>LOG IN</Text>
+          </Pressable>
+          <Pressable style={styles.registerAction} onPress={() => router.push('/register')}>
+            <Text style={styles.registerActionText}>JOIN KRIANSTYLE</Text>
+          </Pressable>
         </View>
       </View>
 
@@ -284,16 +294,22 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: COLORS.background },
   topHeader: {
-    minHeight: 88,
+    minHeight: 126,
     width: '100%',
     paddingHorizontal: 14,
     paddingVertical: 6,
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 7,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.line,
   },
   logoPair: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  authActions: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 9 },
+  loginAction: { borderWidth: 1, borderColor: '#315F9B', borderRadius: 20, paddingHorizontal: 17, paddingVertical: 8 },
+  loginActionText: { color: COLORS.blueLight, fontSize: 9, fontWeight: '900', letterSpacing: 1 },
+  registerAction: { backgroundColor: COLORS.blue, borderRadius: 20, paddingHorizontal: 17, paddingVertical: 8 },
+  registerActionText: { color: '#071426', fontSize: 9, fontWeight: '900', letterSpacing: 1 },
   mainHeaderLogo: { width: 124, height: 68, borderRadius: 8 },
   logoDivider: { width: 1, height: 42, backgroundColor: COLORS.line },
   zoneHeaderLogo: { width: 76, height: 76 },

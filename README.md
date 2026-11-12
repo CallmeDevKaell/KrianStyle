@@ -1,47 +1,63 @@
 # KrianStyle Mobile App
 
-An Expo + React Native starter for the KrianStyle community landing page.
+Expo Router mobile application for the KrianStyle community. The app uses a dark navy and blue visual theme and the existing KrianStyle Website Supabase project.
 
-## Stack
+## Current features
 
-- Expo SDK 57 + Expo Router
-- React Native + TypeScript
-- Supabase JS client connected to the existing **KrianStyle Website** project
-- Existing Supabase publishable key only (no service-role key in the app)
+- Community landing page with the two KrianStyle logos.
+- Username/password login and member registration.
+- Admin dashboard, President/VP account creation, and account management.
+- President/VP dashboard, Officer account creation, and account management.
+- Position-based Officer dashboard with separate Secretary attendance for Eyeball and Meeting.
+- Vice President Officer requests require President approval before the Officer can log in.
+- Supabase Edge Functions keep privileged account operations on the server.
 
-## Run locally
+## Requirements
 
-1. Install Node.js LTS (Node 22.13+ is suitable for Expo SDK 57).
-2. Extract this folder and open it in VS Code.
-3. Open a terminal in this folder and run:
+- Node.js LTS
+- npm
+- Expo Go or an Android/iOS emulator
 
-   ```bash
-   npm install
-   npx expo start
-   ```
+## Install and run
 
-4. Scan the QR code using Expo Go. If Expo Go on your device does not support SDK 57, update Expo Go or use an SDK 57-compatible development build.
+```bash
+npm install
+npx expo start -c
+```
 
-## Supabase connection
+## Project structure
 
-The `.env.local` file is preconfigured with the existing KrianStyle Supabase Project URL and publishable key. It is ignored by Git. Do not replace the publishable key with a database password or service-role/secret key.
+```text
+KrianStyleApp/
+├── app/
+│   ├── admin/
+│   ├── leadership/
+│   ├── officer/
+│   ├── index.tsx
+│   ├── login.tsx
+│   └── register.tsx
+├── assets/
+├── lib/
+├── supabase/
+│   ├── functions/
+│   └── sql/
+├── .env.local
+└── package.json
+```
 
-Supabase project: `KrianStyle Website`
-Project reference: `bzzsdijhozulzvbgtfak`
-Region: `ap-northeast-1`
+## Supabase configuration
 
-The app has a ready-to-use client at `lib/supabase.ts`. The landing page does not query or modify database tables yet. The existing project's `public` schema was checked and had no tables at the time this starter was prepared.
+The `.env.local` file contains the project URL and publishable key. These are public-client values; do not add the Supabase secret/service-role key to this file or to any Expo file.
 
-## Current first screen
+The production project already has the `profiles` table, RLS policies, registration rate limiter, approval workflow columns, and the `register-member`, `admin-accounts`, and `leadership-accounts` Edge Functions deployed. See `ADMIN-SETUP.md`, `README-AUTH-SETUP.md`, `LEADERSHIP-SETUP.md`, and `OFFICER-SETUP.md` for their respective workflows.
 
-- KrianStyle main logo in the header and hero
-- Bohol Zone / District 3 – Carmen Zone logo
-- Black, violet, and yellow brand palette
-- Hero section with working scroll buttons
-- Zone identity section
-- Brotherhood, respect, and passion values
-- Community closing section
+## Important role behavior
 
-## Notes
-
-The two supplied JPEG logos are kept in `assets/`. Replace them only when you have a higher-resolution official artwork or transparent PNG version.
+- Public registration creates Member accounts only.
+- Admin creates President/VP accounts.
+- President-created Officer accounts activate immediately.
+- Vice President-created Officer accounts remain pending until President approval.
+- Every Officer account is assigned one position: Moderator, Secretary, Treasurer, Auditor, or Editor & Media.
+- Only an approved Secretary account can open and manage the attendance module. Other Officer areas remain visible but read-only until their modules are built.
+- Eyeball and Meeting attendance are stored separately with a member name and date.
+- Pending and rejected Officers cannot enter the app's Officer area.
