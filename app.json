@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "KrianStyle",
+    "slug": "krianstyle-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "krianstyle",
+    "userInterfaceStyle": "dark",
+    "plugins": [
+      "expo-router",
+      "expo-sqlite"
+    ],
+    "android": {
+      "package": "com.krianstyle.mobile",
+      "adaptiveIcon": {
+        "backgroundColor": "#09080D"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.krianstyle.mobile"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
