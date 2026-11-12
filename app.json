@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "scheme": "krianstyle",
     "userInterfaceStyle": "dark",
+    "icon": "./assets/icon.png",
     "plugins": [
       "expo-router",
       "expo-sqlite"
@@ -13,14 +14,16 @@
     "android": {
       "package": "com.krianstyle.mobile",
       "adaptiveIcon": {
-        "backgroundColor": "#09080D"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#050B1C"
       }
     },
     "ios": {
       "bundleIdentifier": "com.krianstyle.mobile"
     },
     "web": {
-      "bundler": "metro"
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png"
     }
   }
 }
